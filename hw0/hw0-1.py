@@ -16,7 +16,6 @@ def main():
                     );
             img[x,y] = rgba
             # avatar.putpixel((x,y), rgba)
-    avatar.show()
     avatar.save('Q2.jpg')
 
     #avatar.save("Q2.jpg")
