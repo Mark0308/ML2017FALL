@@ -71,7 +71,6 @@ import sys
 # np.save('hw1_best_model.npy',w)
 # read model
 w = np.load('hw1_best_model.npy')
-
 #Testing
 test_x = []
 n_row = 0
