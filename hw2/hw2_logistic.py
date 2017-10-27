@@ -7,8 +7,10 @@ def ReadData (Trainfile, Resultfile, Testfile):
     x = pd.read_csv(Trainfile).as_matrix() #shape (32561, 106)
     y = pd.read_csv(Resultfile).as_matrix() #shape (32561, 1)
     test = pd.read_csv(Testfile).as_matrix() #shape (10281, 106)
-    x = np.delete(x, range(53, 59), 1)
-    test = np.delete(test, range(53, 59), 1)
+
+    # print (x)
+    # x = np.delete(x, range(53, 59), 1)
+    # test = np.delete(test, range(53, 59), 1)
     y = y.reshape(y.shape[0]) #shape (32561, )
     # # add square term
     # x = np.concatenate((x, x**2), axis=1)
@@ -25,7 +27,7 @@ def ReadData (Trainfile, Resultfile, Testfile):
     return (x, y, test)
 
 def Calculate_loss (x, y, w, bias):
-    fwb = Sigmoid(np.dot(x, w) + bias)
+    fwb = Sigmoid(np.dot(x, w) + bias )
     return (y - fwb, fwb)
 
 def Sigmoid (z):
@@ -66,11 +68,10 @@ def Cross_Entropy (f, y):
     return -np.mean((y * np.log(f+1e-100)) + (1 - y) * np.log(1 - f+1e-100))
 
 if __name__ == '__main__':
-    x, y, test = ReadData('./Data/X_train.csv', './Data/Y_train.csv', './Data/X_test.csv')
+    x, y, test = ReadData(sys.argv[1], sys.argv[2], sys.argv[3])
     w, bias = Train(x, y)
-    result = Test (w, test)
+    result = Test(w, test)
     text = 'id,label\n'
-
     #Initial text
     for i in range (result.shape[0]):
         if result[i] > 0.5:
@@ -80,5 +81,5 @@ if __name__ == '__main__':
         text = text + str(i+1) + ',' + str(int(result[i])) + '\n'
 
     #Write Data
-    with open('./Result/predict_logistic.csv', 'w') as output:
+    with open(sys.argv[4], 'w') as output:
         output.write(text)

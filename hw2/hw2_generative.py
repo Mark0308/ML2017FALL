@@ -9,6 +9,11 @@ def ReadData (Trainfile, Resultfile, Testfile):
     test = pd.read_csv(Testfile).as_matrix()
 
     y = y.reshape(y.shape[0]) #shape (32561, )
+    # x_all = np.concatenate((x, test))
+    # mean = np.mean(x_all, axis = 0)
+    # std = np.std(x_all, axis = 0)
+    # x_all = (x_all - mean) / (std + 1e-100)
+    # x, test = x_all[0 : x.shape[0]], x_all[x.shape[0] : x_all.shape[0]]
     return (x, y, test)
 
 def Calculate_Mu_Sigma (x, y):
@@ -46,7 +51,7 @@ def Caculate_z (mu_0, mu_1, sigma, test, count_0, count_1):
 if __name__ == '__main__':
     # if len(sys.argv) != 3:
     #     print ('No data route')
-    x, y, test = ReadData('./Data/X_train.csv', './Data/Y_train.csv', './Data/X_test.csv')
+    x, y, test = ReadData(sys.argv[1], sys.argv[2], sys.argv[3])
     mu_0, mu_1, sigma, count_0, count_1 = Calculate_Mu_Sigma(x, y) #Caculate mu, sigma
     z = Caculate_z(mu_0, mu_1, sigma, test, count_0, count_1) #Caculate z
     result = 1 / (1 + np.exp(-z)) #sigmoid function
@@ -60,5 +65,5 @@ if __name__ == '__main__':
         text = text + str(i+1) + ',' + str(int(result[i])) + '\n'
 
     #Write Data
-    with open('./Result/predict_generative.csv', 'w') as output:
+    with open(sys.argv[4], 'w') as output:
         output.write(text)
