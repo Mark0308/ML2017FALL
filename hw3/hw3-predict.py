@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     x_test = x_test.reshape(-1, 48, 48, 1)
     print ('predicting')
-    predict_result = model.predict(x_test, batch_size=100)
+    predict_result = model3.predict(x_test, batch_size=100)
     # # preprocessing
     # x_test = x_test.reshape(-1, 1, 48, 48)
     #
