@@ -27,7 +27,7 @@ if __name__ == '__main__':
     result = model.predict(test_sequence)
 
     filestr = 'id,label\n'
-    for i, ans in enumerate(sys.argv[1]):
+    for i, ans in enumerate(result):
         if float(ans) > 0.5:
             ans = 1
         else:
