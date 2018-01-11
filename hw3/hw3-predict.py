@@ -1,9 +1,6 @@
 import numpy as np
 import pandas as pd
 import sys
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 from keras import regularizers
 from keras.models import Sequential
 from keras.layers.advanced_activations import LeakyReLU, PReLU
