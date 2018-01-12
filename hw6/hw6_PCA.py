@@ -15,7 +15,7 @@ def load_img(path):
 
     for i in range(415):
         img = io.imread(path + str(i) + '.jpg')
-        # img = transform.resize(img, (300, 300))
+        img = transform.resize(img, (300, 300))
         img = img.flatten()
         matrix.append(img)
     matrix = np.array(matrix)
@@ -43,8 +43,8 @@ if __name__ == '__main__':
     # all_mean = all_mean.reshape((600, 600, 3))
     # io.imsave('./img/all_mean.jpg', all_mean)
 
-    # eigenvalue_sum = np.sum(s)
-    # print(s[:4] / eigenvalue_sum)
+    eigenvalue_sum = np.sum(s)
+    print(s[:4] / eigenvalue_sum)
 
     # for i in range(4):
     #     draw_img(U.T[i], eigenface_path + str(i) + '.jpg')
