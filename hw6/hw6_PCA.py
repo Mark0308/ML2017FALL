@@ -15,7 +15,7 @@ def load_img(path):
 
     for i in range(415):
         img = io.imread(path + str(i) + '.jpg')
-        img = transform.resize(img, (300, 300))
+        # img = transform.resize(img, (300, 300))
         img = img.flatten()
         matrix.append(img)
     matrix = np.array(matrix)
@@ -30,8 +30,8 @@ def draw_img(picture, path):
 
 if __name__ == '__main__':
 
-    if not os.path.exists(img_path):
-        os.makedirs(img_path)
+    # if not os.path.exists(img_path):
+    #     os.makedirs(img_path)
 
     X_ori = load_img(sys.argv[1])
 
